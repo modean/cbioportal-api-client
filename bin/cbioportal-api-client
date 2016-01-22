@@ -1,0 +1,5 @@
+#!/usr/bin/env node
+
+require(__dirname + './../dist/cli');
+
+// vim: ft=javascript

@@ -60,3 +60,17 @@ Test('cbioPortal.getCaseLists()', t => {
       t.equals(response.length, 10, 'should have all the results');
     });
 });
+
+Test('cbioPortal.getProfileData()', t => {
+  Nock('http://www.cbioportal.org')
+    .get('/webservice.do')
+    .query({ cmd: 'getProfileData', case_set_id: 'gbm_tcga_cnaseq' })
+    .replyWithFile(200, __dirname + '/responses/getProfileData.tsv');
+
+  return cbioPortal.getProfileData({ case_set_id: 'gbm_tcga_cnaseq' })
+    .then(response => {
+      t.ok(Array.isArray(response), 'should return an array');
+      t.ok(response[0].GENE_ID, 'should return profile data');
+      t.equals(response.length, 1, 'should have a single row');
+    });
+});
