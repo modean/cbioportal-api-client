@@ -43,9 +43,6 @@ cbioPortal.getCancerStudies()
     console.log(response); // Prints array of cancer studies returned from API
   });
 ```
-
--
-
 <a name="module_cbioportal-api-client--module.exports.convertResponse"></a>
 #### module.exports.convertResponse(response) ⇒ <code>Promise</code>
 Converts tab delimited responses to JSON format
@@ -56,9 +53,6 @@ Converts tab delimited responses to JSON format
 | Param | Type | Description |
 | --- | --- | --- |
 | response | <code>string</code> | TSV string |
-
-
--
 
 <a name="module_cbioportal-api-client--module.exports..cbioPortal"></a>
 #### module.exports~cbioPortal : <code>Object</code>
@@ -75,27 +69,18 @@ when creating an API client object via the module factory method.
     * [.getCaseLists(query)](#module_cbioportal-api-client--module.exports..cbioPortal+getCaseLists) ⇒ <code>Promise(data)</code>
     * [.getProfileData()](#module_cbioportal-api-client--module.exports..cbioPortal+getProfileData) ⇒ <code>Promise(data)</code>
 
-
--
-
 <a name="module_cbioportal-api-client--module.exports..cbioPortal+getTypesOfCancer"></a>
 ##### cbioPortal.getTypesOfCancer() ⇒ <code>Promise</code>
 Retrieves a list of all the clinical types of cancer stored on the server.
 
 **Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client--module.exports..cbioPortal)</code>  
 **Returns**: <code>Promise</code> - resolves with JSON data  
-
--
-
 <a name="module_cbioportal-api-client--module.exports..cbioPortal+getCancerStudies"></a>
 ##### cbioPortal.getCancerStudies() ⇒ <code>Promise</code>
 Retrieves meta-data regarding cancer studies stored on the server.
 
 **Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client--module.exports..cbioPortal)</code>  
 **Returns**: <code>Promise</code> - resolves with JSON data  
-
--
-
 <a name="module_cbioportal-api-client--module.exports..cbioPortal+getGeneticProfiles"></a>
 ##### cbioPortal.getGeneticProfiles(query) ⇒ <code>Promise(data)</code>
 Retrieves meta-data regarding all genetic profiles, e.g.
@@ -108,9 +93,6 @@ mutation or copy number profiles, stored about a specific cancer study.
 | --- | --- | --- |
 | query | <code>Object</code> |  |
 | query.cancer_study_id | <code>string</code> | Cancer study ID |
-
-
--
 
 <a name="module_cbioportal-api-client--module.exports..cbioPortal+getCaseLists"></a>
 ##### cbioPortal.getCaseLists(query) ⇒ <code>Promise(data)</code>
@@ -127,9 +109,6 @@ Multiple case lists may be associated with each cancer study, and this method en
 | query | <code>Object</code> |  |
 | query.cancer_study_id | <code>string</code> | Cancer study ID |
 
-
--
-
 <a name="module_cbioportal-api-client--module.exports..cbioPortal+getProfileData"></a>
 ##### cbioPortal.getProfileData() ⇒ <code>Promise(data)</code>
 Retrieves genomic profile data for one or more genes.
@@ -141,7 +120,4 @@ Retrieves genomic profile data for one or more genes.
 | options.case_set_id | <code>string</code> | A unique ID used to identify the case list ID in subsequent interface calls. This is a human readable ID. For example, "gbm_all" identifies all cases profiles in the TCGA GBM study. |
 | options.genetic_profile_id | <code>Array.&lt;string&gt;</code> &#124; <code>string</code> | One or more genetic profile IDs |
 | options.gene_list | <code>Array.&lt;string&gt;</code> &#124; <code>string</code> | One or more genes, specified as HUGO Gene Symbols or Entrez Gene IDs |
-
-
--
 
