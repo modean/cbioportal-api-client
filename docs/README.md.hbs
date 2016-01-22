@@ -3,6 +3,30 @@
 
 [cBio Portal API](http://www.cbioportal.org/web_api.jsp) client. Parses tab separated responses into JSON format and works in node and also in the browser via a module loader such as Webpack.
 
+##### Installation
+
+```javascript
+npm install cbioportal-api-client --save
+```
+
+##### Basic Usage
+
+```javascript
+import CbioPortal from 'cbioportal-api-client';
+
+const cbioPortal = CbioPortal();
+
+cbioPortal.getCancerStudies()
+  .then(response => {
+    console.log(response); // Prints array of cancer studies returned from API
+  });
+
+cbioPortal.getGeneticProfiles({ cancer_study_id: 'gbm_tcga' })
+  .then(response => {
+    console.log(response); // Prints array of genetic profiles returned from the 'gbm_tcga' study
+  });
+```
+
 ---
 
 ## API Reference
