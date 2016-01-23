@@ -5,6 +5,8 @@
 
 This library can be used programatically or via the command line.
 
+**Under active development:** This library is currently under active development. The module API is not finalized and is likely to change before v1.
+
 #### Installation
 
 ```bash
