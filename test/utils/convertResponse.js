@@ -20,7 +20,7 @@ Test('Converting responses', t => {
   });
 });
 
-Test('Converting responses with multiple/combined results', t => {
+Test('Converting responses with multiple profiles', t => {
 
   return Promise.props({
     data: readFile('./test/data/gbm_tcga_combined-tp53.tsv', 'utf8')
@@ -31,5 +31,20 @@ Test('Converting responses with multiple/combined results', t => {
     t.equals(response.rows[0].COMMON, 'TP53', 'should parse the data correctly');
     t.equals(response.rows[0].ALTERATION_TYPE, 'MUTATION_EXTENDED', 'should parse the alteration types');
     t.equals(response.rows[1].ALTERATION_TYPE, 'COPY_NUMBER_ALTERATION', 'should parse the alteration types');
+  });
+});
+
+Test('Converting responses with multiple genes', t => {
+
+  return Promise.props({
+    data: readFile('./test/data/gbm_tcga_mutations-tp53-mdm2.tsv', 'utf8')
+  })
+  .then(({ data }) => convertResponse(data, 'getProfileData'))
+  .then(response => {
+    t.equals(response.results, 2, 'should count the results');
+    t.equals(response.rows[0].COMMON, 'MDM2', 'should parse the data correctly');
+    t.equals(response.rows[1].COMMON, 'TP53', 'should parse the data correctly');
+    t.equals(response.rows[0].ALTERATION_TYPE, 'MUTATION_EXTENDED', 'should parse the alteration types');
+    t.equals(response.rows[1].ALTERATION_TYPE, 'MUTATION_EXTENDED', 'should parse the alteration types');
   });
 });
