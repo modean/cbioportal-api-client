@@ -4,7 +4,7 @@
   "description": "cBio Portal API client with promises and response parsing",
   "main": "dist/index.js",
   "bin": {
-    "cbioportal-api-client": "./bin/cbioportal-api-client.js"
+    "cbioportal-api-client": "./bin/cbioportal-api-client"
   },
   "scripts": {
     "build": "npm run docs && npm run clean:dist && babel lib -d dist",
