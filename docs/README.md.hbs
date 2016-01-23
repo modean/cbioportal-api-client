@@ -5,13 +5,15 @@
 
 This library can be used programatically or via the command line.
 
-##### Installation
+#### Installation
 
 ```bash
-npm install cbioportal-api-client --save
+$ npm install cbioportal-api-client --save
 ```
 
-##### Programmatic Usage
+#### Programmatic Usage
+
+[API Reference](#api-reference)
 
 ```javascript
 import CbioPortal from 'cbioportal-api-client';
@@ -29,21 +31,42 @@ cbioPortal.getGeneticProfiles({ cancer_study_id: 'gbm_tcga' })
   });
 ```
 
-##### Command Line Usage
+#### Command Line Usage
 
 **Note:** Requires node.
 
 ```bash
-npm install -g cbioportal-api-client  # Global install to use anywhere
+# global install to use anywhere
+$ npm install -g cbioportal-api-client
+
+# print usage info using --help
+$ cbioportal-api-client --help
+
+  Usage: cbioportal-api-client [options] [command]
+
+
+  Commands:
+
+    getCancerStudies               get cancer study meta-data
+    getTypesOfCancer               get clinical cancer types
+    getGeneticProfiles [options]   get genetic profile data for a cancer study.
+    getCaseLists [options]         get case lists stored for a specific cancer study.
+    getProfileData [options]       get genomic profile data for one or more genes.
+
+  You can get usage info for specific commands using [command] --help
+
+  Options:
+
+    -h, --help             output usage information
+    -V, --version          output the version number
+    -f, --format <format>  response format
+
+# example API call, sends JSON formatted response to stdout
+$ cbioportal-api-client getProfileData -s gbm_tcga_cnaseq -p gbm_tcga_mutations -g TP53
 ```
 
 ---
 
 ## API Reference
-<!-- {{#module}}
-  {{>body~}}
-  {{>member-index~}}
-  {{>members~}}
-{{/module~}} -->
 
 {{>main}}
