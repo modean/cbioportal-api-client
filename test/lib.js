@@ -4,7 +4,7 @@ import CbioPortal from 'lib/index.js';
 
 const cbioPortal = CbioPortal();
 
-Test('cbioPortal.getCancerStudies()', t => {
+Test('getCancerStudies()', t => {
 
   Nock('http://www.cbioportal.org')
     .get('/webservice.do')
@@ -13,13 +13,13 @@ Test('cbioPortal.getCancerStudies()', t => {
 
   return cbioPortal.getCancerStudies()
     .then(response => {
-      t.ok(Array.isArray(response), 'should return an array');
-      t.ok(response[0].cancer_study_id, 'should return cancer studies');
-      t.equals(response.length, 121, 'should have all the results');
+      t.equals(typeof response, 'object', 'should return an object');
+      t.ok(response.rows[0].cancer_study_id, 'should return cancer studies');
+      t.equals(response.results, 121, 'should have all the results');
     });
 });
 
-Test('cbioPortal.getTypesOfCancer()', t => {
+Test('getTypesOfCancer()', t => {
   Nock('http://www.cbioportal.org')
     .get('/webservice.do')
     .query({ cmd: 'getTypesOfCancer' })
@@ -27,13 +27,13 @@ Test('cbioPortal.getTypesOfCancer()', t => {
 
   return cbioPortal.getTypesOfCancer()
     .then(response => {
-      t.ok(Array.isArray(response), 'should return an array');
-      t.ok(response[0].type_of_cancer_id, 'should return cancer type IDs');
-      t.equals(response.length, 601, 'should have all the results');
+      t.equals(typeof response, 'object', 'should return an object');
+      t.ok(response.rows[0].type_of_cancer_id, 'should return cancer type IDs');
+      t.equals(response.results, 601, 'should have all the results');
     });
 });
 
-Test('cbioPortal.getGeneticProfiles()', t => {
+Test('getGeneticProfiles()', t => {
   Nock('http://www.cbioportal.org')
     .get('/webservice.do')
     .query({ cmd: 'getGeneticProfiles', cancer_study_id: 'gbm_tcga' })
@@ -41,13 +41,13 @@ Test('cbioPortal.getGeneticProfiles()', t => {
 
   return cbioPortal.getGeneticProfiles({ cancer_study_id: 'gbm_tcga' })
     .then(response => {
-      t.ok(Array.isArray(response), 'should return an array');
-      t.ok(response[0].genetic_profile_id, 'should return genetic profiles for gbm_tcga');
-      t.equals(response.length, 13, 'should have all the results');
+      t.equals(typeof response, 'object', 'should return an object');
+      t.ok(response.rows[0].genetic_profile_id, 'should return genetic profiles for gbm_tcga');
+      t.equals(response.results, 13, 'should have all the results');
     });
 });
 
-Test('cbioPortal.getCaseLists()', t => {
+Test('getCaseLists()', t => {
   Nock('http://www.cbioportal.org')
     .get('/webservice.do')
     .query({ cmd: 'getCaseLists', cancer_study_id: 'gbm_tcga' })
@@ -55,13 +55,13 @@ Test('cbioPortal.getCaseLists()', t => {
 
   return cbioPortal.getCaseLists({ cancer_study_id: 'gbm_tcga' })
     .then(response => {
-      t.ok(Array.isArray(response), 'should return an array');
-      t.ok(response[0].case_list_id, 'should return case lists for gbm_tcga');
-      t.equals(response.length, 10, 'should have all the results');
+      t.equals(typeof response, 'object', 'should return an object');
+      t.ok(response.rows[0].case_list_id, 'should return case lists for gbm_tcga');
+      t.equals(response.results, 10, 'should have all the results');
     });
 });
 
-Test('cbioPortal.getProfileData()', t => {
+Test('getProfileData()', t => {
   Nock('http://www.cbioportal.org')
     .get('/webservice.do')
     .query({
@@ -71,6 +71,25 @@ Test('cbioPortal.getProfileData()', t => {
       gene_list: 'tp53'
     })
     .replyWithFile(200, __dirname + '/responses/getProfileData.tsv');
+
+  return cbioPortal.getProfileData({
+    case_set_id: 'gbm_tcga_cnaseq',
+    genetic_profile_id: 'gbm_tcga_mutations',
+    gene_list: 'tp53'
+  })
+    .then(response => {
+      t.equals(typeof response, 'object', 'should return an object');
+      t.ok(response.rows[0].GENE_ID, 'should return profile data');
+      t.equals(
+        response.rows[0].ALTERATION_TYPE,
+        'MUTATION_EXTENDED',
+        'first row should contain the mutations'
+      );
+      t.equals(response.results, 1, 'should have a single row');
+    });
+});
+
+Test('getProfileData() - multiple profiles', t => {
 
   Nock('http://www.cbioportal.org')
     .get('/webservice.do')
@@ -86,26 +105,67 @@ Test('cbioPortal.getProfileData()', t => {
     );
 
   return cbioPortal.getProfileData({
-    case_set_id: 'gbm_tcga_cnaseq',
-    genetic_profile_id: 'gbm_tcga_mutations',
-    gene_list: 'tp53'
-  })
-    .then(response => {
-      t.ok(Array.isArray(response), 'should return an array');
-      t.ok(response[0].GENE_ID, 'should return profile data');
-      t.equals(response.length, 1, 'should have a single row');
-    })
-    .then(() => cbioPortal.getProfileData({
       case_set_id: 'gbm_tcga_cnaseq',
       genetic_profile_id: ['gbm_tcga_mutations', 'gbm_tcga_gistic'],
       gene_list: 'tp53'
-    }))
+    })
     .then(response => {
-      t.ok(Array.isArray(response), 'should return an array');
+      t.equals(typeof response, 'object', 'should return an object');
       t.ok(
-        response[0].GENE_ID && response[1].GENE_ID,
+        response.rows[0].GENE_ID && response.rows[1].GENE_ID,
         'should return profile data'
       );
-      t.equals(response.length, 2, 'should return two rows of data');
+      t.equals(
+        response.rows[0].ALTERATION_TYPE,
+        'MUTATION_EXTENDED',
+        'first row should contain the mutations'
+      );
+      t.equals(
+        response.rows[1].ALTERATION_TYPE,
+        'COPY_NUMBER_ALTERATION',
+        'seconds row should contain the copy number alterations'
+      );
+      t.equals(response.results, 2, 'should return two rows of data');
+    });
+});
+
+
+Test('getProfileData() - multiple genes', t => {
+
+  Nock('http://www.cbioportal.org')
+    .get('/webservice.do')
+    .query({
+      cmd: 'getProfileData',
+      case_set_id: 'gbm_tcga_cnaseq',
+      genetic_profile_id: 'gbm_tcga_mutations',
+      gene_list: 'tp53,mdm2'
+    })
+    .replyWithFile(
+      200,
+      __dirname + '/responses/getProfileData-multipleGenes.tsv'
+    );
+
+  return cbioPortal.getProfileData({
+      case_set_id: 'gbm_tcga_cnaseq',
+      genetic_profile_id: ['gbm_tcga_mutations'],
+      gene_list: ['tp53', 'mdm2']
+    })
+    .then(response => {
+      t.equals(typeof response, 'object', 'should return an object');
+      t.ok(
+        response.rows[0].GENE_ID && response.rows[1].GENE_ID,
+        'should return profile data'
+      );
+      t.equals(
+        response.rows[0].ALTERATION_TYPE,
+        'MUTATION_EXTENDED',
+        'first row should contain mutations'
+      );
+      t.equals(
+        response.rows[1].ALTERATION_TYPE,
+        'MUTATION_EXTENDED',
+        'first second should contain mutations'
+      );
+      t.equals(response.results, 2, 'should return two rows of data');
     });
 });
