@@ -95,14 +95,14 @@ $ cbioportal-api-client getAlterationSummary -s gbm_tcga_cnaseq -p gbm_tcga_muta
 ## cbioportal-api-client ⇒ <code>cbioPortal</code>
 Creates a new cBio Portal API client
 
-**See**: [cbioPortal](#module_cbioportal-api-client..cbioPortal)  
+**See**: [cbioPortal](#module_cbioportal-api-client..cbioPortal)
 
 | Param | Type | Description |
 | --- | --- | --- |
 | config | <code>Object</code> | Configuration options object. |
 | config.requestOpts | <code>Object</code> | Override the request congfiguration object. |
 
-**Example**  
+**Example**
 Basic usage:
 
 ```javascript
@@ -132,8 +132,8 @@ cbioPortal.getCancerStudies()
 cbioPortal API Object Prototype. Used as the object prototype
 when creating an API client object via the module factory method.
 
-**Kind**: inner constant of <code>[cbioportal-api-client](#module_cbioportal-api-client)</code>  
-**See**: Use [CbioPortal()](#module_cbioportal-api-client) for object creation.  
+**Kind**: inner constant of <code>[cbioportal-api-client](#module_cbioportal-api-client)</code>
+**See**: Use [CbioPortal()](#module_cbioportal-api-client) for object creation.
 
 * [~cbioPortal](#module_cbioportal-api-client..cbioPortal) : <code>Object</code>
     * [.getTypesOfCancer()](#module_cbioportal-api-client..cbioPortal+getTypesOfCancer) ⇒ <code>Promise</code>
@@ -149,9 +149,9 @@ when creating an API client object via the module factory method.
 #### cbioPortal.getTypesOfCancer() ⇒ <code>Promise</code>
 Retrieves a list of all the clinical types of cancer stored on the server.
 
-**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>  
-**Returns**: <code>Promise</code> - See fullfills/rejects  
-**Fulfills**: <code>Array</code> response data converted from TSV to JSON  
+**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>
+**Returns**: <code>Promise</code> - See fullfills/rejects
+**Fulfills**: <code>Array</code> response data converted from TSV to JSON
 
 -----
 
@@ -159,9 +159,9 @@ Retrieves a list of all the clinical types of cancer stored on the server.
 #### cbioPortal.getCancerStudies() ⇒ <code>Promise</code>
 Retrieves meta-data regarding cancer studies stored on the server.
 
-**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>  
-**Returns**: <code>Promise</code> - See fullfills/rejects  
-**Fulfills**: <code>Array</code> response data converted from TSV to JSON  
+**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>
+**Returns**: <code>Promise</code> - See fullfills/rejects
+**Fulfills**: <code>Array</code> response data converted from TSV to JSON
 
 -----
 
@@ -170,9 +170,9 @@ Retrieves meta-data regarding cancer studies stored on the server.
 Retrieves meta-data regarding all genetic profiles, e.g.
 mutation or copy number profiles, stored about a specific cancer study.
 
-**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>  
-**Returns**: <code>Promise</code> - See fullfills/rejects  
-**Fulfills**: <code>Array</code> response data converted from TSV to JSON  
+**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>
+**Returns**: <code>Promise</code> - See fullfills/rejects
+**Fulfills**: <code>Array</code> response data converted from TSV to JSON
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -190,8 +190,8 @@ For example, a within a particular study, only some cases may have sequence data
 
 Multiple case lists may be associated with each cancer study, and this method enables you to retrieve meta-data regarding all of these case lists.
 
-**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>  
-**Fulfill**: JSON formatted response  
+**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>
+**Fulfill**: JSON formatted response
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -207,8 +207,8 @@ Retrieves genomic profile data for one or more genes.
 
 **Note:** If you pass in multiple genetic profile IDs and multiple genes, the library will make multiple requests as the API does not support this type of query.
 
-**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>  
-**Fulfill**: JSON formatted response  
+**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>
+**Fulfill**: JSON formatted response
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -224,7 +224,7 @@ Retrieves genomic profile data for one or more genes.
 ## cbioportal-api-client/utils/convertResponse ⇒ <code>Promise</code>
 Converts tab delimited responses to JSON format
 
-**Returns**: <code>Promise</code> - Resolves with the response JSON  
+**Returns**: <code>Promise</code> - Resolves with the response JSON
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -237,17 +237,32 @@ Converts tab delimited responses to JSON format
 ## cbioportal-api-client/utils/summarizeAlterations ⇒ <code>Promise</code>
 Summarizes alterations for results
 
-**Returns**: <code>Promise</code> - Resolves with the summary  
-**Fulfills**: <code>Object</code> Object with results, see example  
+**Returns**: <code>Promise</code> - Resolves with the summary
+**Fulfills**: <code>Object</code> Object with results, see example
 
 | Param | Type | Description |
 | --- | --- | --- |
 | dataSets | <code>Object</code> &#124; <code>Array</code> | Converted response dataset(s) |
 
-**Example**  
-Example response object:
+**Example**
+Basic Usage:
 
 ```javascript
+import CbioPortal from 'cbioportal-api-client';
+import { summarizeAlterations } from 'cbioportal-api-client/dist/utils';
+
+const cbioPortal = CbioPortal();
+
+cbioPortal.getProfileData({
+  case_set_id: 'gbm_tcga_cnaseq',
+  genetic_profile_id: ['gbm_tcga_mutations', 'gbm_tcga_gistic'],
+  gene_list: ['tp53', 'mdm2', 'mdm4']
+})
+.then(response => summarizeAlterations(response))
+.then(result => console.log(result));
+
+// console.log output
+
 {
   summary: {
     genes: {
@@ -255,8 +270,19 @@ Example response object:
         mutated: 29,
         cna: 2,
         combined: 30
+      },
+      mdm2: {
+        mutated: 1,
+        cna: 9,
+        combined: 10
+      },
+      mdm4: {
+        mutated: 0,
+        cna: 10,
+        combined: 10
       }
-    }
+    },
+    overall: 47
   }
 }
 ```
