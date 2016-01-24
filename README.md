@@ -5,6 +5,8 @@
 
 This library can be used programatically or via the command line.
 
+**Under active development:** This library is currently under active development. The module API is not finalized and is likely to change before v1.
+
 #### Installation
 
 ```bash
@@ -78,7 +80,7 @@ Creates a new cBio Portal API client
 | Param | Type | Description |
 | --- | --- | --- |
 | config | <code>Object</code> | Configuration options object. |
-| config.includeRaw | <code>Boolean</code> | Include the raw TSV response |
+| config.requestOpts | <code>Object</code> | Override the request congfiguration object. |
 
 **Example**  
 Basic usage:
@@ -182,6 +184,8 @@ Multiple case lists may be associated with each cancer study, and this method en
 <a name="module_cbioportal-api-client..cbioPortal+getProfileData"></a>
 #### cbioPortal.getProfileData(query) ⇒ <code>Promise</code>
 Retrieves genomic profile data for one or more genes.
+
+**Note:** If you pass in multiple genetic profile IDs and multiple genes, the library will make multiple requests as the API does not support this type of query.
 
 **Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>  
 **Fulfill**: JSON formatted response  

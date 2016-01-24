@@ -1,6 +1,7 @@
 import Test from 'blue-tape';
 import Nock from 'nock';
 import CbioPortal from 'lib/index.js';
+import _uniq from 'lodash/uniq';
 
 const cbioPortal = CbioPortal();
 
@@ -167,5 +168,59 @@ Test('getProfileData() - multiple genes', t => {
         'first second should contain mutations'
       );
       t.equals(response.results, 2, 'should return two rows of data');
+    });
+});
+
+Test.only('getProfileData() - multiple genes AND multiple profiles', t => {
+
+  Nock('http://www.cbioportal.org')
+    .get('/webservice.do')
+    .query({
+      cmd: 'getProfileData',
+      case_set_id: 'gbm_tcga_cnaseq',
+      genetic_profile_id: 'gbm_tcga_mutations',
+      gene_list: 'tp53,mdm2,mdm4'
+    })
+    .replyWithFile(
+      200,
+      __dirname + '/data/gbm_tcga_mutations-tp53-mdm2-mdm4.tsv'
+    );
+
+  Nock('http://www.cbioportal.org')
+    .get('/webservice.do')
+    .query({
+      cmd: 'getProfileData',
+      case_set_id: 'gbm_tcga_cnaseq',
+      genetic_profile_id: 'gbm_tcga_gistic',
+      gene_list: 'tp53,mdm2,mdm4'
+    })
+    .replyWithFile(
+      200,
+      __dirname + '/data/gbm_tcga_gistic-tp53-mdm2-mdm4.tsv'
+    );
+
+  return cbioPortal.getProfileData({
+      case_set_id: 'gbm_tcga_cnaseq',
+      genetic_profile_id: ['gbm_tcga_mutations', 'gbm_tcga_gistic'],
+      gene_list: ['tp53', 'mdm2', 'mdm4']
+    })
+    .then(response => {
+      t.equals(typeof response, 'object', 'should return an object');
+      t.equals(response.results, 6, 'should return a row count');
+      t.equals(response.rows.length, 6, 'should return six rows of data');
+
+      let genes = [];
+      let types = [];
+
+      response.rows.forEach(row => {
+        genes.push(row.COMMON.toLowerCase());
+        types.push(row.ALTERATION_TYPE.toLowerCase());
+      });
+
+      genes = _uniq(genes);
+      types = _uniq(types);
+
+      t.deepEquals(genes.sort(), ['tp53', 'mdm2', 'mdm4'].sort());
+      t.deepEquals(types.sort(), ['mutation_extended', 'copy_number_alteration'].sort());
     });
 });
