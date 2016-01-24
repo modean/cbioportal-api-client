@@ -1,5 +1,7 @@
 # cBio Portal API Client
+[![npm](https://img.shields.io/npm/v/cbioportal-api-client.svg?style=flat-square)]()
 [![Build Status](https://img.shields.io/circleci/project/nathanmarks/cbioportal-api-client/master.svg?style=flat-square)](https://circleci.com/gh/nathanmarks/cbioportal-api-client) [![Coverage Status](https://img.shields.io/coveralls/nathanmarks/cbioportal-api-client/master.svg?style=flat-square)](https://coveralls.io/github/nathanmarks/cbioportal-api-client?branch=master)
+[![Dependency Status](https://david-dm.org/nathanmarks/cbioportal-api-client.svg?style=flat-square)](https://david-dm.org/nathanmarks/cbioportal-api-client)
 
 [cBio Portal API](http://www.cbioportal.org/web_api.jsp) client. Parses tab separated responses into JSON format. Works in node and in the browser via a module loader such as [Webpack](http://webpack.github.io).
 
