@@ -1,7 +1,5 @@
 # cBio Portal API Client
-[![npm](https://img.shields.io/npm/v/cbioportal-api-client.svg?style=flat-square)]()
 [![Build Status](https://img.shields.io/circleci/project/nathanmarks/cbioportal-api-client/master.svg?style=flat-square)](https://circleci.com/gh/nathanmarks/cbioportal-api-client) [![Coverage Status](https://img.shields.io/coveralls/nathanmarks/cbioportal-api-client/master.svg?style=flat-square)](https://coveralls.io/github/nathanmarks/cbioportal-api-client?branch=master)
-[![Dependency Status](https://david-dm.org/nathanmarks/cbioportal-api-client.svg?style=flat-square)](https://david-dm.org/nathanmarks/cbioportal-api-client)
 
 [cBio Portal API](http://www.cbioportal.org/web_api.jsp) client. Parses tab separated responses into JSON format. Works in node and in the browser via a module loader such as [Webpack](http://webpack.github.io).
 
@@ -97,14 +95,14 @@ $ cbioportal-api-client getAlterationSummary -s gbm_tcga_cnaseq -p gbm_tcga_muta
 ## cbioportal-api-client ⇒ <code>cbioPortal</code>
 Creates a new cBio Portal API client
 
-**See**: [cbioPortal](#module_cbioportal-api-client..cbioPortal)
+**See**: [cbioPortal](#module_cbioportal-api-client..cbioPortal)  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | config | <code>Object</code> | Configuration options object. |
 | config.requestOpts | <code>Object</code> | Override the request congfiguration object. |
 
-**Example**
+**Example**  
 Basic usage:
 
 ```javascript
@@ -134,8 +132,8 @@ cbioPortal.getCancerStudies()
 cbioPortal API Object Prototype. Used as the object prototype
 when creating an API client object via the module factory method.
 
-**Kind**: inner constant of <code>[cbioportal-api-client](#module_cbioportal-api-client)</code>
-**See**: Use [CbioPortal()](#module_cbioportal-api-client) for object creation.
+**Kind**: inner constant of <code>[cbioportal-api-client](#module_cbioportal-api-client)</code>  
+**See**: Use [CbioPortal()](#module_cbioportal-api-client) for object creation.  
 
 * [~cbioPortal](#module_cbioportal-api-client..cbioPortal) : <code>Object</code>
     * [.getTypesOfCancer()](#module_cbioportal-api-client..cbioPortal+getTypesOfCancer) ⇒ <code>Promise</code>
@@ -151,9 +149,9 @@ when creating an API client object via the module factory method.
 #### cbioPortal.getTypesOfCancer() ⇒ <code>Promise</code>
 Retrieves a list of all the clinical types of cancer stored on the server.
 
-**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>
-**Returns**: <code>Promise</code> - See fullfills/rejects
-**Fulfills**: <code>Array</code> response data converted from TSV to JSON
+**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>  
+**Returns**: <code>Promise</code> - See fullfills/rejects  
+**Fulfills**: <code>Array</code> response data converted from TSV to JSON  
 
 -----
 
@@ -161,9 +159,9 @@ Retrieves a list of all the clinical types of cancer stored on the server.
 #### cbioPortal.getCancerStudies() ⇒ <code>Promise</code>
 Retrieves meta-data regarding cancer studies stored on the server.
 
-**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>
-**Returns**: <code>Promise</code> - See fullfills/rejects
-**Fulfills**: <code>Array</code> response data converted from TSV to JSON
+**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>  
+**Returns**: <code>Promise</code> - See fullfills/rejects  
+**Fulfills**: <code>Array</code> response data converted from TSV to JSON  
 
 -----
 
@@ -172,9 +170,9 @@ Retrieves meta-data regarding cancer studies stored on the server.
 Retrieves meta-data regarding all genetic profiles, e.g.
 mutation or copy number profiles, stored about a specific cancer study.
 
-**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>
-**Returns**: <code>Promise</code> - See fullfills/rejects
-**Fulfills**: <code>Array</code> response data converted from TSV to JSON
+**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>  
+**Returns**: <code>Promise</code> - See fullfills/rejects  
+**Fulfills**: <code>Array</code> response data converted from TSV to JSON  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -192,8 +190,8 @@ For example, a within a particular study, only some cases may have sequence data
 
 Multiple case lists may be associated with each cancer study, and this method enables you to retrieve meta-data regarding all of these case lists.
 
-**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>
-**Fulfill**: JSON formatted response
+**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>  
+**Fulfill**: JSON formatted response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -209,8 +207,8 @@ Retrieves genomic profile data for one or more genes.
 
 **Note:** If you pass in multiple genetic profile IDs and multiple genes, the library will make multiple requests as the API does not support this type of query.
 
-**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>
-**Fulfill**: JSON formatted response
+**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>  
+**Fulfill**: JSON formatted response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -226,7 +224,7 @@ Retrieves genomic profile data for one or more genes.
 ## cbioportal-api-client/utils/convertResponse ⇒ <code>Promise</code>
 Converts tab delimited responses to JSON format
 
-**Returns**: <code>Promise</code> - Resolves with the response JSON
+**Returns**: <code>Promise</code> - Resolves with the response JSON  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -239,14 +237,14 @@ Converts tab delimited responses to JSON format
 ## cbioportal-api-client/utils/summarizeAlterations ⇒ <code>Promise</code>
 Summarizes alterations for results
 
-**Returns**: <code>Promise</code> - Resolves with the summary
-**Fulfills**: <code>Object</code> Object with results, see example
+**Returns**: <code>Promise</code> - Resolves with the summary  
+**Fulfills**: <code>Object</code> Object with results, see example  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | dataSets | <code>Object</code> &#124; <code>Array</code> | Converted response dataset(s) |
 
-**Example**
+**Example**  
 Basic Usage:
 
 ```javascript
