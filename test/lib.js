@@ -171,7 +171,7 @@ Test('getProfileData() - multiple genes', t => {
     });
 });
 
-Test.only('getProfileData() - multiple genes AND multiple profiles', t => {
+Test('getProfileData() - multiple genes AND multiple profiles', t => {
 
   Nock('http://www.cbioportal.org')
     .get('/webservice.do')
