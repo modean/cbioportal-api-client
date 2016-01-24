@@ -224,3 +224,64 @@ Test('getProfileData() - multiple genes AND multiple profiles', t => {
       t.deepEquals(types.sort(), ['mutation_extended', 'copy_number_alteration'].sort());
     });
 });
+
+Test('getAlterationSummary()', t => {
+
+  Nock('http://www.cbioportal.org')
+    .get('/webservice.do')
+    .query({
+      cmd: 'getProfileData',
+      case_set_id: 'gbm_tcga_cnaseq',
+      genetic_profile_id: 'gbm_tcga_mutations',
+      gene_list: 'tp53,mdm2,mdm4'
+    })
+    .replyWithFile(
+      200,
+      __dirname + '/data/gbm_tcga_mutations-tp53-mdm2-mdm4.tsv'
+    );
+
+  Nock('http://www.cbioportal.org')
+    .get('/webservice.do')
+    .query({
+      cmd: 'getProfileData',
+      case_set_id: 'gbm_tcga_cnaseq',
+      genetic_profile_id: 'gbm_tcga_gistic',
+      gene_list: 'tp53,mdm2,mdm4'
+    })
+    .replyWithFile(
+      200,
+      __dirname + '/data/gbm_tcga_gistic-tp53-mdm2-mdm4.tsv'
+    );
+
+  return cbioPortal.getAlterationSummary({
+      case_set_id: 'gbm_tcga_cnaseq',
+      genetic_profile_id: ['gbm_tcga_mutations', 'gbm_tcga_gistic'],
+      gene_list: ['tp53', 'mdm2', 'mdm4']
+    })
+    .then(result => {
+      t.deepEquals(result, {
+        summary: {
+          genes: {
+            tp53: {
+              mutated: 29,
+              cna: 2,
+              combined: 30
+            },
+            mdm2: {
+              mutated: 1,
+              cna: 9,
+              combined: 10
+            },
+            mdm4: {
+              mutated: 0,
+              cna: 10,
+              combined: 10
+            }
+          },
+          overall: 47
+        }
+      });
+
+      return true;
+    });
+});

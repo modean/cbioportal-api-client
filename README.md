@@ -49,11 +49,12 @@ $ cbioportal-api-client --help
 
   Commands:
 
-    getCancerStudies               get cancer study meta-data
-    getTypesOfCancer               get clinical cancer types
-    getGeneticProfiles [options]   get genetic profile data for a cancer study.
-    getCaseLists [options]         get case lists stored for a specific cancer study.
-    getProfileData [options]       get genomic profile data for one or more genes.
+    getCancerStudies                 get cancer study meta-data
+    getTypesOfCancer                 get clinical cancer types
+    getGeneticProfiles [options]     get genetic profile data for a cancer study.
+    getCaseLists [options]           get case lists stored for a specific cancer study.
+    getProfileData [options]         get genomic profile data for one or more genes.
+    getAlterationSummary [options]   summarize alterations for the profile data.
 
   You can get usage info for specific commands using [command] --help
 
@@ -65,11 +66,16 @@ $ cbioportal-api-client --help
 
 # example API call, sends JSON formatted response to stdout
 $ cbioportal-api-client getProfileData -s gbm_tcga_cnaseq -p gbm_tcga_mutations -g TP53
+# .... cut long JSON response
+
+# summarizing alterations
+$ cbioportal-api-client getAlterationSummary -s gbm_tcga_cnaseq -p gbm_tcga_mutations,gbm_tcga_gistic -g TP53,MDM2,MDM4
+{"summary":{"genes":{"mdm2":{"mutated":1,"cna":9,"combined":10},"mdm4":{"mutated":0,"cna":10,"combined":10},"tp53":{"mutated":29,"cna":2,"combined":30}},"overall":47}}
 ```
 
 ---
 
-## API Reference
+# API Reference
 
 ## Modules
 
@@ -80,19 +86,8 @@ $ cbioportal-api-client getProfileData -s gbm_tcga_cnaseq -p gbm_tcga_mutations 
 <dt><a href="#module_cbioportal-api-client/utils/convertResponse">cbioportal-api-client/utils/convertResponse</a> ⇒ <code>Promise</code></dt>
 <dd><p>Converts tab delimited responses to JSON format</p>
 </dd>
-<dt><a href="#module_cbioportal-api-client/utils/summarizeAlterations">cbioportal-api-client/utils/summarizeAlterations</a></dt>
-<dd><p>Exports utility functions for summarizing gene alterations</p>
-</dd>
-</dl>
-
-## Functions
-
-<dl>
-<dt><a href="#parseResponseMeta">parseResponseMeta(response, cmd)</a> ⇒ <code>Object</code></dt>
-<dd><p>Prepare response meta for the converted JSON</p>
-</dd>
-<dt><a href="#maybeTransformArray">maybeTransformArray(n)</a> ⇒ <code>string</code></dt>
-<dd><p>Transform an array to CSV</p>
+<dt><a href="#module_cbioportal-api-client/utils/summarizeAlterations">cbioportal-api-client/utils/summarizeAlterations</a> ⇒ <code>Promise</code></dt>
+<dd><p>Summarizes alterations for results</p>
 </dd>
 </dl>
 
@@ -239,17 +234,9 @@ Converts tab delimited responses to JSON format
 -----
 
 <a name="module_cbioportal-api-client/utils/summarizeAlterations"></a>
-## cbioportal-api-client/utils/summarizeAlterations
-Exports utility functions for summarizing gene alterations
-
-
------
-
-<a name="exp_module_cbioportal-api-client/utils/summarizeAlterations--module.exports"></a>
-### module.exports(dataSets) ⇒ <code>Promise</code> ⏏
+## cbioportal-api-client/utils/summarizeAlterations ⇒ <code>Promise</code>
 Summarizes alterations for results
 
-**Kind**: Exported function  
 **Returns**: <code>Promise</code> - Resolves with the summary  
 **Fulfills**: <code>Object</code> Object with results, see example  
 
@@ -272,37 +259,7 @@ Example response object:
     }
   }
 }
-
-
 ```
-
------
-
-<a name="parseResponseMeta"></a>
-## parseResponseMeta(response, cmd) ⇒ <code>Object</code>
-Prepare response meta for the converted JSON
-
-**Kind**: global function  
-**Returns**: <code>Object</code> - Object with response meta and row meta  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| response | <code>string</code> | Raw response from the server |
-| cmd | <code>string</code> | API command |
-
-
------
-
-<a name="maybeTransformArray"></a>
-## maybeTransformArray(n) ⇒ <code>string</code>
-Transform an array to CSV
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| n | <code>mixed</code> | 
-
 
 -----
 
