@@ -105,6 +105,7 @@ $ cbioportal-api-client getAlterationSummary -s gbm_tcga_cnaseq -p gbm_tcga_muta
             * [.getGeneticProfiles(query)](#module_cbioportal-api-client..cbioPortal+getGeneticProfiles) ⇒ <code>Promise</code>
             * [.getCaseLists(query)](#module_cbioportal-api-client..cbioPortal+getCaseLists) ⇒ <code>Promise</code>
             * [.getProfileData(query)](#module_cbioportal-api-client..cbioPortal+getProfileData) ⇒ <code>Promise</code>
+            * [.getAlterationSummary(query)](#module_cbioportal-api-client..cbioPortal+getAlterationSummary) ⇒ <code>Promise</code>
 
 
 -----
@@ -114,6 +115,7 @@ $ cbioportal-api-client getAlterationSummary -s gbm_tcga_cnaseq -p gbm_tcga_muta
 Creates a new cBio Portal API client
 
 **Kind**: exports method of <code>[cbioportal-api-client](#module_cbioportal-api-client)</code>
+
 **Returns**: <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>
 
 | Param | Type | Description |
@@ -121,7 +123,7 @@ Creates a new cBio Portal API client
 | config | <code>Object</code> | Configuration options object. |
 | config.requestOpts | <code>Object</code> | Override the request congfiguration object. |
 
-**Example**
+**Example**  
 Basic usage:
 
 ```javascript
@@ -143,7 +145,8 @@ cbioPortal API Object Prototype. Used as the object prototype
 when creating an API client object via the module factory method.
 
 **Kind**: inner constant of <code>[cbioportal-api-client](#module_cbioportal-api-client)</code>
-**See**: Use [CbioPortal()](#module_cbioportal-api-client) for object creation.
+
+**See**: Use [CbioPortal()](#module_cbioportal-api-client) for object creation.  
 
 * [~cbioPortal](#module_cbioportal-api-client..cbioPortal) : <code>Object</code>
     * [.getTypesOfCancer()](#module_cbioportal-api-client..cbioPortal+getTypesOfCancer) ⇒ <code>Promise</code>
@@ -151,6 +154,7 @@ when creating an API client object via the module factory method.
     * [.getGeneticProfiles(query)](#module_cbioportal-api-client..cbioPortal+getGeneticProfiles) ⇒ <code>Promise</code>
     * [.getCaseLists(query)](#module_cbioportal-api-client..cbioPortal+getCaseLists) ⇒ <code>Promise</code>
     * [.getProfileData(query)](#module_cbioportal-api-client..cbioPortal+getProfileData) ⇒ <code>Promise</code>
+    * [.getAlterationSummary(query)](#module_cbioportal-api-client..cbioPortal+getAlterationSummary) ⇒ <code>Promise</code>
 
 
 -----
@@ -160,8 +164,9 @@ when creating an API client object via the module factory method.
 Retrieves a list of all the clinical types of cancer stored on the server.
 
 **Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>
-**Returns**: <code>Promise</code> - See fullfills/rejects
-**Fulfills**: <code>Array</code> response data converted from TSV to JSON
+
+**Returns**: <code>Promise</code>
+**Fulfills**: <code>Array</code> response data converted from TSV to JSON  
 
 -----
 
@@ -170,8 +175,9 @@ Retrieves a list of all the clinical types of cancer stored on the server.
 Retrieves meta-data regarding cancer studies stored on the server.
 
 **Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>
-**Returns**: <code>Promise</code> - See fullfills/rejects
-**Fulfills**: <code>Array</code> response data converted from TSV to JSON
+
+**Returns**: <code>Promise</code>
+**Fulfills**: <code>Array</code> response data converted from TSV to JSON  
 
 -----
 
@@ -181,8 +187,9 @@ Retrieves meta-data regarding all genetic profiles, e.g.
 mutation or copy number profiles, stored about a specific cancer study.
 
 **Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>
-**Returns**: <code>Promise</code> - See fullfills/rejects
-**Fulfills**: <code>Array</code> response data converted from TSV to JSON
+
+**Returns**: <code>Promise</code>
+**Fulfills**: <code>Array</code> response data converted from TSV to JSON  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -201,8 +208,9 @@ For example, a within a particular study, only some cases may have sequence data
 Multiple case lists may be associated with each cancer study, and this method enables you to retrieve meta-data regarding all of these case lists.
 
 **Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>
+
 **Returns**: <code>Promise</code>
-**Fulfill**: JSON formatted response
+**Fulfill**: response data converted from TSV to JSON  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -219,15 +227,34 @@ Retrieves genomic profile data for one or more genes.
 **Note:** If you pass in multiple genetic profile IDs and multiple genes, the library will make multiple requests as the API does not support this type of query.
 
 **Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>
+
 **Returns**: <code>Promise</code>
-**Fulfill**: JSON formatted response
+**Fulfill**: response data converted from TSV to JSON  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | query | <code>Object</code> |  |
-| options.case_set_id | <code>string</code> | A unique ID used to identify the case list ID in subsequent interface calls. This is a human readable ID. For example, "gbm_all" identifies all cases profiles in the TCGA GBM study. |
-| options.genetic_profile_id | <code>Array.&lt;string&gt;</code> &#124; <code>string</code> | One or more genetic profile IDs |
-| options.gene_list | <code>Array.&lt;string&gt;</code> &#124; <code>string</code> | One or more genes, specified as HUGO Gene Symbols or Entrez Gene IDs |
+| query.case_set_id | <code>string</code> | A unique ID used to identify the case list ID in subsequent interface calls. This is a human readable ID. For example, "gbm_all" identifies all cases profiles in the TCGA GBM study. |
+| query.genetic_profile_id | <code>Array.&lt;string&gt;</code> &#124; <code>string</code> | One or more genetic profile IDs |
+| query.gene_list | <code>Array.&lt;string&gt;</code> &#124; <code>string</code> | One or more genes, specified as HUGO Gene Symbols or Entrez Gene IDs |
+
+
+-----
+
+<a name="module_cbioportal-api-client..cbioPortal+getAlterationSummary"></a>
+#### cbioPortal.getAlterationSummary(query) ⇒ <code>Promise</code>
+Summarize gene alterations
+
+**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>
+
+**Returns**: <code>Promise</code>
+
+| Param | Type | Description |
+| --- | --- | --- |
+| query | <code>Object</code> |  |
+| query.case_set_id | <code>string</code> | A unique ID used to identify the case list ID in subsequent interface calls. This is a human readable ID. For example, "gbm_all" identifies all cases profiles in the TCGA GBM study. |
+| query.genetic_profile_id | <code>Array.&lt;string&gt;</code> &#124; <code>string</code> | One or more genetic profile IDs |
+| query.gene_list | <code>Array.&lt;string&gt;</code> &#124; <code>string</code> | One or more genes, specified as HUGO Gene Symbols or Entrez Gene IDs |
 
 
 -----
@@ -250,13 +277,13 @@ Converts tab delimited responses to JSON format
 Summarizes alterations for results
 
 **Returns**: <code>Promise</code> - Resolves with the summary
-**Fulfills**: <code>Object</code> Object with results, see example
+**Fulfills**: <code>Object</code> Object with results, see example  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | dataSets | <code>Object</code> &#124; <code>Array</code> | Converted response dataset(s) |
 
-**Example**
+**Example**  
 Basic Usage:
 
 ```javascript
