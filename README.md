@@ -114,8 +114,7 @@ $ cbioportal-api-client getAlterationSummary -s gbm_tcga_cnaseq -p gbm_tcga_muta
 ### cbioportal-api-client ⏏ exports.default(config) ⇒ <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>
 Creates a new cBio Portal API client
 
-**Kind**: exports method of <code>[cbioportal-api-client](#module_cbioportal-api-client)</code>
-
+**Kind**: exports method of <code>[cbioportal-api-client](#module_cbioportal-api-client)</code>  
 **Returns**: <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>
 
 | Param | Type | Description |
@@ -144,8 +143,7 @@ cbioPortal.getCancerStudies()
 cbioPortal API Object Prototype. Used as the object prototype
 when creating an API client object via the module factory method.
 
-**Kind**: inner constant of <code>[cbioportal-api-client](#module_cbioportal-api-client)</code>
-
+**Kind**: inner constant of <code>[cbioportal-api-client](#module_cbioportal-api-client)</code>  
 **See**: Use [CbioPortal()](#module_cbioportal-api-client) for object creation.  
 
 * [~cbioPortal](#module_cbioportal-api-client..cbioPortal) : <code>Object</code>
@@ -163,8 +161,7 @@ when creating an API client object via the module factory method.
 #### cbioPortal.getTypesOfCancer() ⇒ <code>Promise</code>
 Retrieves a list of all the clinical types of cancer stored on the server.
 
-**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>
-
+**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>  
 **Returns**: <code>Promise</code>
 **Fulfills**: <code>Array</code> response data converted from TSV to JSON  
 
@@ -174,8 +171,7 @@ Retrieves a list of all the clinical types of cancer stored on the server.
 #### cbioPortal.getCancerStudies() ⇒ <code>Promise</code>
 Retrieves meta-data regarding cancer studies stored on the server.
 
-**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>
-
+**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>  
 **Returns**: <code>Promise</code>
 **Fulfills**: <code>Array</code> response data converted from TSV to JSON  
 
@@ -186,8 +182,7 @@ Retrieves meta-data regarding cancer studies stored on the server.
 Retrieves meta-data regarding all genetic profiles, e.g.
 mutation or copy number profiles, stored about a specific cancer study.
 
-**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>
-
+**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>  
 **Returns**: <code>Promise</code>
 **Fulfills**: <code>Array</code> response data converted from TSV to JSON  
 
@@ -207,8 +202,7 @@ For example, a within a particular study, only some cases may have sequence data
 
 Multiple case lists may be associated with each cancer study, and this method enables you to retrieve meta-data regarding all of these case lists.
 
-**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>
-
+**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>  
 **Returns**: <code>Promise</code>
 **Fulfill**: response data converted from TSV to JSON  
 
@@ -226,8 +220,7 @@ Retrieves genomic profile data for one or more genes.
 
 **Note:** If you pass in multiple genetic profile IDs and multiple genes, the library will make multiple requests as the API does not support this type of query.
 
-**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>
-
+**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>  
 **Returns**: <code>Promise</code>
 **Fulfill**: response data converted from TSV to JSON  
 
@@ -245,8 +238,7 @@ Retrieves genomic profile data for one or more genes.
 #### cbioPortal.getAlterationSummary(query) ⇒ <code>Promise</code>
 Summarize gene alterations
 
-**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>
-
+**Kind**: instance method of <code>[cbioPortal](#module_cbioportal-api-client..cbioPortal)</code>  
 **Returns**: <code>Promise</code>
 
 | Param | Type | Description |
