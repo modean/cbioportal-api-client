@@ -7,8 +7,8 @@
     "cbioportal-api-client": "./bin/cbioportal-api-client"
   },
   "scripts": {
-    "build": "npm run docs && npm run clean:dist && babel lib -d dist",
-    "build:dev": "nodemon -w lib --exec \"npm run docs && npm run clean:dist && babel lib -d dist\"",
+    "build": "npm run clean:dist && babel lib -d dist",
+    "build:dev": "nodemon -w lib --exec \"npm run clean:dist && babel lib -d dist\"",
     "clean": "npm run clean:dist && npm run clean:coverage",
     "clean:dist": "rimraf dist",
     "clean:coverage": "rimraf coverage",
@@ -62,8 +62,10 @@
     "commander": "^2.9.0",
     "continuation-local-storage": "^3.1.4",
     "csv-parser": "^1.9.2",
+    "fbjs": "^0.7.0",
     "in-publish": "^2.0.0",
     "lodash": "^4.0.0",
-    "request-promise": "^2.0.0"
+    "request-promise": "^2.0.0",
+    "stream-browserify": "^2.0.1"
   }
 }
