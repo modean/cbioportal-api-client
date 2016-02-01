@@ -1,6 +1,6 @@
 {
   "name": "cbioportal-api-client",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "cBio Portal API client with promises and response parsing",
   "main": "dist/index.js",
   "bin": {
