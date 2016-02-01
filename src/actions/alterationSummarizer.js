@@ -25,7 +25,7 @@ export function summarizeAlterations (query) {
       })
         .then(summary => {
           return summary;
-        });
+        })
     }
   };
 }

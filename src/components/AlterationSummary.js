@@ -41,12 +41,13 @@ function formatSummary (summary) {
     );
   }
 
-  return <p>woof</p>;
+  return <p>There was an error (most likely with the query): @TODO make sure api client lib parses errors properly</p>;
 }
 
 function shortSummary (gene, data) {
+  const percent = data.combined ? data.combined : data.mutated ? data.mutated : data.cna;
   return (
-    <span key={gene}>{gene.toUpperCase()} is altered in {data.combined}% of cases. <br /></span>
+    <span key={gene}>{gene.toUpperCase()} is altered in {percent}% of cases. <br /></span>
   );
 }
 
@@ -55,10 +56,15 @@ function longSummary (gene, data) {
 
   return (
     <p key={gene}>
-      {geneSymbol} is mutated in {data.mutated}% of all cases. <br />
-      {geneSymbol} is copy number altered in {data.cna}% of all cases. <br />
-      <br />
-      Total % of cases where {geneSymbol} is altered by either mutation or copy number alteration: {data.combined}% of all cases.
+      {Object.keys(data).map(key => {
+        if (key === 'mutated') {
+          return <span key={key}>{geneSymbol} is mutated in {data.mutated}% of all cases. <br /></span>;
+        } else if (key === 'cna') {
+          return <span key={key}>{geneSymbol} is copy number altered in {data.cna}% of all cases. <br /></span>;
+        } else if (key === 'combined') {
+          return <span key={key}><br />Total % of cases where {geneSymbol} is altered by either mutation or copy number alteration: {data.combined}% of all cases.</span>;
+        }
+      })}
     </p>
   );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
+import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, useRouterHistory } from 'react-router';
 import createHistory from 'history/lib/createHashHistory';
