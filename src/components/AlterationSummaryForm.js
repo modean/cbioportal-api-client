@@ -89,7 +89,7 @@ AlterationSummaryForm = reduxForm({
   initialValues: {
     caseSetId: 'gbm_tcga_cnaseq',
     geneticProfileId: 'gbm_tcga_mutations,gbm_tcga_gistic',
-    geneList: 'tp53,mdm2'
+    geneList: 'tp53,mdm2,mdm4'
   }
 })(AlterationSummaryForm);
 
