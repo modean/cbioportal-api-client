@@ -1,8 +1,9 @@
 var path = require('path');
 var webpack = require('webpack');
+var autoprefixer = require('autoprefixer');
 
 module.exports = {
-  devtool: 'source-map',
+  // devtool: 'source-map',
   entry: [
     './src/index'
   ],
@@ -26,9 +27,25 @@ module.exports = {
   ],
   module: {
     loaders: [{
-      test: /\.js$/,
+      test: /\.jsx?/,
       loaders: ['babel'],
       include: path.join(__dirname, 'src')
-    }]
+    }, {
+      test: /\.css$/,
+      loader: 'style!css!postcss'
+    }, {
+      test: /\.json/,
+      loaders: ['json']
+    }],
+    noParse: /node_modules\/json-schema\/lib\/validate\.js/
+  },
+  postcss: function () {
+    return [autoprefixer];
+  },
+  node: {
+    console: true,
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
   }
 };

@@ -1,0 +1,4 @@
+
+export const SUMMARIZE_ALTERATIONS = 'cbioportal-api-client/SUMMARIZE_ALTERATIONS';
+export const SUMMARIZE_ALTERATIONS_SUCCESS = 'cbioportal-api-client/SUMMARIZE_ALTERATIONS_SUCCESS';
+export const SUMMARIZE_ALTERATIONS_FAIL = 'cbioportal-api-client/SUMMARIZE_ALTERATIONS_FAIL';

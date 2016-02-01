@@ -1,0 +1,36 @@
+html {
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+body {
+  background: #f9f9f9;
+  font-size: 15px;
+  line-height: 20px;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.app-container {
+  margin: 30px;
+}
+
+.alteration-summarizer {
+  display: flex;
+  margin: -15px;
+}
+
+.alteration-summarizer .col {
+  margin: 15px;
+  max-width: 400px;
+}
+
+@media screen and (max-width: 600px) {
+  .alteration-summarizer {
+    flex-direction: column;
+  }
+}
